@@ -35,7 +35,7 @@ if (typeof globalThis.communityIdeas === "undefined") {
         function loader(index) {
             const script = document.createElement("script");
             const id = String(index).padStart(3, "0");
-            script.src = baseurl + "/" + id + "/script.js?" + Date.now;
+            script.src = baseurl + "/" + id + "/script.js?" + Date.now();
             script.addEventListener("load", () => {
                 const idea = communityIdeas[index];
                 const name = idea.name;

@@ -6,8 +6,8 @@
  * Note the final idea (eg https://blah.org/idea/004/script.js) will return a 404,
  * at which point loading stops.
  */
-if (typeof communityIdeas === "undefined") {
-    const communityIdeas = [];
+if (typeof globalThis.communityIdeas === "undefined") {
+    globalThis.communityIdeas = [];
 
     function communityIdeaLoader() {
         const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));

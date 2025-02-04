@@ -23,10 +23,11 @@ function communityIdeaLoader() {
     elt.addEventListener("click", () => {
         container.classList.toggle("communityidea-hidden");
     });
-    let storage;
+    let storage = null;
     try {
         storage = JSON.parse(window.localStorage.getItem("communityIdeas"));
-    } catch (e) {
+    } catch (e) { }
+    if (!Array.isArray(storage)) {
         window.localStorage.setItem("communityIdeas", JSON.stringify(storage = []));
     }
 

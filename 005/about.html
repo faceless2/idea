@@ -1,0 +1,16 @@
+<h1>Moving the Categories up</h3>
+<p>
+Bump Categories up the DOM and style them as pills.
+I've moved them immediately before "#profileAdLeft" if it exists, or the EDIT button if it doesn't.
+I've also removed the EDIT button (as it's duplicated), removed the initial "Categories" link, 
+and added a "Categories" header.
+</p>
+<p>
+I've tested wrapping manually on an artifially long category name, it works properly
+</p>
+<h3>If approved</h3>
+<p>
+Other than moving the node, I also hid the initial A and final EDIT button using the attached
+stylesheet - better to just not generate the nodes, obviously - and also removed the text
+between each node (the ":" and "|" values). I also removes the top/bottom border on ".category--links"
+</p>

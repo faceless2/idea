@@ -1,0 +1,23 @@
+#Categories > a:first-child {
+    display: none;              /* The "Categories" bit is redundant now we have a section header */
+}
+
+#Categories > span {
+    display: inline-block;
+/*    background: #4a4; */
+    background: #008000;        /* Same color as links? */
+    padding: 4px 1em;
+    margin: 6px;
+    color: white;
+    border-radius: 0.5em;
+    overflow-wrap: break-word;
+}
+
+#Categories > span > a {
+    text-decoration: none;
+    color: white !important;
+}
+
+#Categories > span.EDIT {
+    display: none;              /* The "EDIT" button after Categories is redundant, we have another edit button on the line below */
+}

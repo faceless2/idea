@@ -48,7 +48,7 @@ communityIdeas[communityIdeas.length] = (() => {
             document.head.removeChild(link);
             categoriesParent.insertBefore(categories, categoriesNext);
             categoriesHeader.parentNode.removeChild(categoriesHeader);
-            for (let n in categoryInnerChildren) {
+            for (let n of categoryInnerChildren) {
                 categoriesInner.appendChild(n);
             }
             categories.style.borderTopWidth = null;

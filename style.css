@@ -1,0 +1,43 @@
+#communityidea-activator {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+    line-height: 1;
+    padding: 2px;
+    border: 1px solid black;
+    background: red;
+    opacity: 0.5;
+}
+
+#communityidea-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: max-content;
+    border: 1px solid black;
+    background: #CCCE;
+    height: 100vh;
+    padding: 8px;
+    z-index: 9998;
+    font-size: 14px;
+}
+#communityidea-container label:has(input:disabled) {
+    color: #888;
+    text-decoration: line-through;
+}
+
+#communityidea-container > div {
+    margin: 4px;
+}
+#communityidea-container input {
+    margin-right: 0.5em;
+}
+#communityidea-container a {
+    margin-left: 0.5em;
+    color: black;
+}
+
+.communityidea-hidden {
+    display: none;
+}

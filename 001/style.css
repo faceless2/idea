@@ -1,0 +1,13 @@
+.tree--great_great_grandparents .tree--placement .col {
+    padding-right: 32px;
+}
+.tree--great_great_grandparents .profile--actions > li:has(span.icon--more-p) {
+    position: absolute;
+    right: 16px;
+    top: 0;
+}
+.tree--great_great_grandparents .profile--actions > li:has(span.icon--more-m) {
+    position: absolute;
+    right: 16px;
+    bottom: -4px;
+}

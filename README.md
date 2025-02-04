@@ -31,18 +31,18 @@ loads and navigation around the site.
 The "?" button next to each idea's name will give more detail on the idea.
 
 The ideas are maintained in github at https://github.com/faceless2/idea, and any checkins to that
-repository are immediately mirrored to https://bremford.org/idea, where the content is served from.
+repository are immediately mirrored to https://unlikelyproducts.com/idea, where the content is served from.
 
 
 # How to load the loader manually, as a one off
 To load the ideas manually, open the website and paste this into the console
 ```
-(()=>{let s = document.createElement("script"); s.src = "https://bremford.org/idea/loader.js"; document.head.appendChild(s); })()
+(()=>{let s = document.createElement("script"); s.src = "https://unlikelyproducts.com/idea/loader.js"; document.head.appendChild(s); })()
 ```
 Obviously this will have to be done each time the page is loaded
 
 # How to load the loader always
 To load the ideas automatically, add this to the document head
 ```
-<script src="https://bremford.oorg/idea/loader.js"></script>
+<script src="https://unlikelyproducts.com/idea/loader.js"></script>
 ```

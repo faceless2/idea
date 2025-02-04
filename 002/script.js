@@ -7,7 +7,7 @@
 communityIdeas[communityIdeas.length] = (() => {
     const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));
     let footnote, footnoteParent, footnoteNext, rightcolumn;
-    let row, problemsOrQuestionsBox, profileManagerBox, timestampBox, accessedBox, timestampValue, helpCousinsBox, biography;
+    let row, problemsOrQuestionsBox, profileManagerBox, timestampBox, accessedBox, timestampValue, helpCousinsBox, feedBox, biography;
 
     let o = {
         name: "Move \"profile manager\" to right",
@@ -22,9 +22,14 @@ communityIdeas[communityIdeas.length] = (() => {
                 row = footnote.querySelector("div.row");
                 problemsOrQuestionsBox = row.querySelector("div.col-lg-4:nth-child(1)");
                 profileManagerBox = row.querySelector("div.col-lg-8:nth-child(2)");
-                timestampBox = footnote.querySelector("p:nth-child(2)");
+                timestampBox = row.nextElementSibling;
+                if (timestampBox.nextElementSibling && timestampBox.nextElementSibling.tagName == "DIV") {
+                    feedBox = timestampBox.nextElementSibling;
+                    accessedBox = feedBox.nextElementSibling;
+                } else {
+                    accessedBox = timestampBox.nextElementSibling;
+                }
                 timestampValue = timestampBox.innerHTML;
-                accessedBox = footnote.querySelector("p:nth-child(3)");
                 helpCousinsBox = accessedBox.querySelector("div");      // moved as part of feature 000
                 return row && problemsOrQuestionsBox && profileManagerBox && timestampBox && accessedBox && biography;
             } else {
@@ -46,11 +51,12 @@ communityIdeas[communityIdeas.length] = (() => {
                 helpCousinsBox.classList.remove("float-lg-end");
             }
             footnote.appendChild(problemsOrQuestionsBox);
-            // If the the timestamp text can be split into two lines, do so
-            let v = timestampValue.split(/\|/);
-            if (v.length == 2) {
-                timestampBox.innerHTML = "<div>" + v[0].trim() + "</div><div>" + v[1].trim() + "</div>";
+            // If the the timestamp text can be split into multiple lines, do so
+            let temp = "";
+            for (let v of timestampValue.split(/\|/)) {
+                temp += "<div>" + v + "</div>";
             }
+            timestampBox.innerHTML = temp;
         },
         deactivate: () => {
             footnoteParent.insertBefore(footnote, footnoteNext);

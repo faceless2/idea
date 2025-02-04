@@ -1,0 +1,15 @@
+<h1>Add a count of comments and sources to the top links</h1>
+<p>
+Super easy change which seems useful for two reasons. First, it may encourage people to 
+add and format their sources (it only counts LI elements), and if there are comments
+counted at the top it might encourage a casual visitor to a page to scroll down,
+which might improve engagement, and might also show a few more adverts...
+</p>
+<h3>If approved</h3>
+<p>
+Change is obvious - for "source" I'm counting LI children of any UL and OL objects
+that are siblings of the "Sources" header, until the next section. I did the same
+for comments - the number of items matched by "#comments.container .comment" - but
+you've obviously got this information already so could set it on the server just as
+easily.
+</p>

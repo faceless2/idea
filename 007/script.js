@@ -5,12 +5,22 @@
  */
 communityIdeas[communityIdeas.length] = (() => {
     const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));
-    let trimmer, disableOnBlank;
+    let trimmer, escapeReset, disableOnBlank;
     let o = {
         name: "Helpful edit fields",
         load: () => {
             trimmer = (e) => {
                 e.target.value = e.target.value.trim();
+            };
+            escapeReset = (e) => {
+                if (e.key === "Escape") {
+                    let origValue = originalFormState[e.target.name];   // Defined in edit_person.js
+                    if (typeof origValue != "undefined") {
+                        e.target.value = origValue;
+                        e.target.classList.remove("changed");   // Will be replaced with a more consistent approach in edit_person.js
+                    }
+                    e.target.blur();
+                }
             };
             disableOnBlank = (e) => {
                 e = e.target;
@@ -51,6 +61,10 @@ communityIdeas[communityIdeas.length] = (() => {
             });
             document.querySelectorAll("input:not([type]), input[type=\"text\"]").forEach((e) => {
                 e.addEventListener("change", trimmer);
+                e.addEventListener("keypress", escapeReset);
+            });
+            document.querySelectorAll("select").forEach((e) => {
+                e.addEventListener("keypress", escapeReset);
             });
             document.getElementsByName("mStatus_DeathDate").forEach((e) => {
                 e.addEventListener("change", disableOnBlank);

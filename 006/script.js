@@ -32,6 +32,11 @@ communityIdeas[communityIdeas.length] = (() => {
                 }
                 let select = document.createElement("select");
                 select.classList.add("form-select");
+                select.addEventListener("change", () => {
+                    // Obviously this would be integrated with the code in edit_person.js
+                    let origValue = originalFormState[select.name];   // Defined in edit_person.js
+                    select.classList.toggle("changed", typeof origValue != "undefined" && e.value != origValue);
+                });
                 restoredata.select = select;
                 formGroup.insertBefore(select, formGroup.querySelector(".input-group-text"));
                 select.appendChild(document.createElement("option"));

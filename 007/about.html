@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="../style.css"/>
 <h1>Helpful fields</h3>
 <p>
-This makes three changes to the edit fields</p>
+This makes four changes to the edit fields</p>
 </p>
 <ol>
 <li>
@@ -17,6 +17,11 @@ Text fields have leading/trailing whitespace trimmed when their values are chang
 Only applies to single line fields, eg names, places - <b>not</b> the biography.
 </li>
 <li>
+Pressing the "Esc" key in any field resets it to the value it was on load and blurs
+the focus. I've often wanted this feature. Works on select fields too, could <i>probably</i>
+be extended to radio buttons if desired.
+</li>
+<li>
 When a Death Date/Place is set to "still living", the value of the field is reset
 to empty and the field is disabled. To me this is an obvious validation step before
 saving, but I appreciate there are probably many profiles that already have a date/place
@@ -27,8 +32,8 @@ changed if the status is <b>changed</b> to "still living".
 <h3>If approved</h3>
 <p>
 maxlength is best set on the server side when creating the pages.
-The other two are "change" listeners which are added
+The other three are "change" or "keypress" listeners which are added
 to the appropriate fields. They can easily be copied directly from <a href="script.js">script.js</a>
-or equivalents written, they're only a few lines.
+or this functinality merged the methods in edit_person.js, they're only a few lines.
 </p>
 </html>

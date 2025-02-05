@@ -1,0 +1,31 @@
+<html class="about">
+<link rel="stylesheet" href="../style.css">
+<h1>Compact: deduplicate name</h1>
+<p>
+The primary H1 at the top contains the entire name EXCEPT the "prefix", "nickname" and "other surnames"
+Adding those fields to the name makes the name at the top of the "Family" box redundant, so it
+can be removed. Also removed the "Family Tree of X" and Descendants of X" values from those tabs,
+both values are repeated in the tree itself.
+</p><p>
+We can also make better use of formatting in the H1 - styling "prefix", "suffix" and "other surnames" in small
+text, and nicknames in italic. Some example profiles:
+<ul>
+<li>Schleswig-Holstein-Sonderburg-Gl%C3%BCcksburg-3</li>
+<li>Windsor-129</li>
+<li>Peterson-18005</li>
+<li>Bramford-65</li>
+</ul>
+<h3>If approved</h3>
+<p>
+These changes are trivially done on the server when generating the page. I would suggest when formatting
+the H1, break it into sections for easier styling:
+<pre>
+&lt;h1&gt;
+ &lt;span class="prefix" itemProp="honorifixPrefix"&gt;Sir&lt;/span&gt;
+ &lt;span class="givenName" itemProp="givenName"&gt;John&lt;/span&gt;
+ &lt;span class="surname" itemProp="surname"&gt;Smith&lt;/span&gt;
+&lt;/h1&gt;
+</pre>
+
+</p>
+</html>

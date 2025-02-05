@@ -1,0 +1,19 @@
+.tree--apps_link {
+    display: none;
+}
+
+body:has(#familyTreeApps-tab.active) {
+
+    #nav-familyContent ~ *, #subfooter, footer {
+        display: none
+    }
+
+    #familyTreeApps {
+        height: 80vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}

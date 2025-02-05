@@ -1,0 +1,18 @@
+h1 .lifespan {
+    display: none;
+}
+h1 + div > p {
+    margin: 0;
+}
+h1 + div > p :is(.BLANK, .EDIT) {
+    display: none;
+}
+.copy--buttons {
+    float: right;
+    white-space: nowrap;
+    clear: both;
+    margin-top: 1em;
+}
+.page--title > :first-child {
+    display: block;
+}

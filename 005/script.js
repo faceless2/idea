@@ -43,6 +43,7 @@ communityIdeas[communityIdeas.length] = (() => {
             categories.style.borderTopWidth = "0";
             categories.style.borderBottomWidth = "0";
             categories.classList.add("mb-3");
+            return true;
         },
         deactivate: () => {
             document.head.removeChild(link);

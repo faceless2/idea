@@ -24,6 +24,7 @@ communityIdeas[communityIdeas.length] = (() => {
             li.appendChild(linkTop);
             linkTop.innerHTML = "Top";
             linkBottom.style.display = "none";
+            return true;
         },
         deactivate: () => {
             linkTop.parentNode.parentNode.removeChild(linkTop.parentNode);

@@ -47,8 +47,12 @@ if (typeof globalThis.communityIdeas === "undefined") {
                 input.addEventListener("change", () => {
                     if (input.checked) {
                         console.log("CommunityIdea: activating " + id + " \"" + name + "\"");
-                        storage[index] = true;
-                        idea.activate();
+                        if (!idea.activate()) {
+                            input.checked = false;
+                            input.disabled = true;
+                        } else {
+                            storage[index] = true;
+                        }
                     } else {
                         console.log("CommunityIdea: deactivating " + id + " \"" + name + "\"");
                         storage[index] = false;

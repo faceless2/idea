@@ -14,6 +14,7 @@ communityIdeas[communityIdeas.length] = (() => {
         },
         activate: () => {
             document.head.appendChild(link);
+            return true;
         },
         deactivate: () => {
             document.head.removeChild(link);

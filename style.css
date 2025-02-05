@@ -1,3 +1,19 @@
+:root.about {
+    background: #eee;
+    font: 18px/1.5 sans-serif;
+}
+:root.about body {
+    background: white;
+    max-width: 1000px;
+    padding: 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+:root.about :is(ul,ol) li {
+    margin: 1em 0;
+}
+
 #communityidea-activator {
     position: fixed;
     left: 0;

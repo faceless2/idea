@@ -44,6 +44,7 @@ communityIdeas[communityIdeas.length] = (() => {
             if (dnaCount > 0 && document.querySelector("a[href=\"#DNA\"]")) {
                 document.querySelector("a[href=\"#DNA\"]").innerHTML = "DNA (" + dnaCount + ")";
             }
+            return true;
         },
         deactivate: () => {
             if (commentCount > 0 && document.querySelector("a[href=\"#Comments\"]")) {

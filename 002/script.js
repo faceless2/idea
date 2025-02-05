@@ -57,6 +57,7 @@ communityIdeas[communityIdeas.length] = (() => {
                 temp += "<div>" + v + "</div>";
             }
             timestampBox.innerHTML = temp;
+            return true;
         },
         deactivate: () => {
             footnoteParent.insertBefore(footnote, footnoteNext);

@@ -8,7 +8,7 @@ communityIdeas[communityIdeas.length] = (() => {
         name: "Promote Categories",
         load: () => {
             categories = document.querySelector(".category--links");
-            categoriesInner = categories.querySelector("#Categories");
+            categoriesInner = categories ? categories.querySelector("#Categories") : null;
             main = document.querySelector("#Biography");
             if (categories && main && categoriesInner) {
                 main = main.parentNode;

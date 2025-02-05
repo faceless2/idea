@@ -21,7 +21,7 @@ should check if they can be cleanly applied to the DOM before they load.
 To load the ideas manually, load the website, open the JavaScript console, paste in the below text and hit enter. If you reload the page or navigate to a new page, this will need to be done again.
 
 ```
-(()=>{let s = document.createElement("script"); s.src = "https://unlikelyproducts.com/idea/loader.js"; document.head.appendChild(s); })()
+(()=>{let s = document.createElement("script"); s.src = "https://unlikelyproducts.com/idea/loader.js?"+Date.now(); document.head.appendChild(s); })()
 ```
 
 ### Run the loader manually using a bookmark (recommended)

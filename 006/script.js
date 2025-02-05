@@ -96,8 +96,8 @@ communityIdeas[communityIdeas.length] = (() => {
                     this.deactivate();
                     return false;
                 }
-                return true;
             });
+            return true;
         },
         deactivate: () => {
             document.head.removeChild(link);

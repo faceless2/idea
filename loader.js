@@ -48,6 +48,7 @@ if (typeof globalThis.communityIdeas === "undefined") {
                     if (input.checked) {
                         console.log("CommunityIdea: activating " + id + " \"" + name + "\"");
                         if (!idea.activate()) {
+                            console.log("CommunityIdea: activating " + id + " \"" + name + "\" failed, disabling");
                             input.checked = false;
                             input.disabled = true;
                         } else {
@@ -65,7 +66,7 @@ if (typeof globalThis.communityIdeas === "undefined") {
                 help.href = baseurl + "/" + id + "/about.html";
                 help.appendChild(document.createTextNode("?"));
                 label.appendChild(input);
-                label.appendChild(document.createTextNode(name));
+                label.appendChild(document.createTextNode(id + ": " + name));
                 box.appendChild(label);
                 box.appendChild(help);
                 container.appendChild(box);

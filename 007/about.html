@@ -1,0 +1,34 @@
+<html class="about">
+<link rel="stylesheet" href="../style.css"/>
+<h1>Helpful fields</h3>
+<p>
+This makes three changes to the edit fields</p>
+</p>
+<ol>
+<li>
+The prefix/suffix fields are limited to 10 characters, because that's what they're
+limited to in the database! I don't know the length limits on other fields, but they're
+all currently given a maxlength of 60 - if the limits are different for a particular
+field, they should be set to that limit. <b>Without this, data is truncated when saving</b>.
+This one really is a no-brainer.
+</li>
+<li>
+Text fields have leading/trailing whitespace trimmed when their values are changed.
+Only applies to single line fields, eg names, places - <b>not</b> the biography.
+</li>
+<li>
+When a Death Date/Place is set to "still living", the value of the field is reset
+to empty and the field is disabled. To me this is an obvious validation step before
+saving, but I appreciate there are probably many profiles that already have a date/place
+and yet are also "still living". It won't affect those at all - the value is only
+changed if the status is <b>changed</b> to "still living".
+</li>
+</ol>
+<h3>If approved</h3>
+<p>
+maxlength is best set on the server side when creating the pages.
+The other two are "change" listeners which are added
+to the appropriate fields. They can easily be copied directly from <a href="script.js">script.js</a>
+or equivalents written, they're only a few lines.
+</p>
+</html>

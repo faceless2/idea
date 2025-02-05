@@ -1,0 +1,19 @@
+.input-group + .form-check.form-check-inline {
+    display: none;      /* if this went live, obviously just don't generate this box */
+}
+
+.input-group > :is(input,select) + select {
+    /* Ugh, !important is horrible - adding a class to the select would probably make more sense */
+    flex: 0 !important;
+    min-width: fit-content !important;
+}
+
+form .form-select {
+    /*
+    Really this rule should be in the main stylesheet! It makes the select the
+    same height as an input. Without it, the "Language" field is a different
+    height t the other fields
+    */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

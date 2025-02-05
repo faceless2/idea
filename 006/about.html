@@ -1,0 +1,31 @@
+<html class="about">
+<link rel="stylesheet" href="../style.css"/>
+<h1>Field Qualifiers to Selects</h3>
+<p>
+Change the radio button groups ("certain", "uncertain" etc) when editing fields
+to a SELECT. Why? Several reasons:
+</p>
+<ul>
+<li>With the new proposed design, the "grouping" of the field label, the field,
+and the radio buttons below it is not as clear as it might be</li>
+<li>Fields without radio buttons are unevenly spaced</li>
+<li>Without this we have very long field boxes - too long for some fields. Somehow this now seems less important</li>
+<li>Radio buttons can't be deselected! I've always found this a problem on the old
+site too - once a field is marked as "confident" I can never return it to "unspecified confidence".
+With this design, you can do this - I think that's a good thing, but if it's not desirable it
+can easily be changed (to disallow the selection of the blank option)
+</li>
+</ul>
+<p>
+To make this work visually I had to change "intentionally blank but still living" to "still living".
+</p>
+<h3>If approved</h3>
+<p>
+Each radio button group in a ".form-check-inline" becomes a select, and is moved into the preceding ".form-group",
+immediately after the normal input field. The ".form-check-inline" can be removed. Also needs <a href="style.css">this stylesheet</a>
+</p>
+<p>
+You'd also need to verify that changing eg "confident" to a blank value was OK in the backend, and disable
+the option of selecting a blank if not.
+</p>
+</html>

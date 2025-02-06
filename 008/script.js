@@ -29,7 +29,7 @@ communityIdeas[communityIdeas.length] = (() => {
                 }
             });
             h1 = document.querySelector("#person h1[itemprop=\"name\"]");
-            h1Text = h1.firstChild;
+            h1Text = h1 ? h1.firstChild : null;
             return h1 && nameBox;
         },
         activate: () => {

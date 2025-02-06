@@ -8,6 +8,9 @@ communityIdeas[communityIdeas.length] = (() => {
         name: "Move \"help cousins\"",
         load: () => {
             footnote = document.querySelector("aside.footnote");
+            if (!footnote) {
+                return false;
+            }
             cousins = footnote.nextElementSibling;
             while (cousins && !cousins.textContent.includes("Help cousins find this profile")) {
                 cousins = cousins.nextElementSibling;
@@ -17,7 +20,7 @@ communityIdeas[communityIdeas.length] = (() => {
                 cousinsNextSibling = cousins.nextSibling;
             }
             button = footnote.querySelector("button.btn-utility");
-            return footnote && cousins;
+            return button && cousins;
         },
         activate: () => {
             footnote.lastElementChild.appendChild(cousins);

@@ -7,7 +7,7 @@
 communityIdeas[communityIdeas.length] = (() => {
     const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));
     let footnote, footnoteParent, footnoteNext, rightcolumn;
-    let row, problemsOrQuestionsBox, profileManagerBox, timestampBox, accessedBox, timestampValue, helpCousinsBox, feedBox, biography;
+    let row, problemsOrQuestionsBox, profileManagerBox, editsBox, helpCousinsBox, biography;
 
     let o = {
         name: "Move \"profile manager\" to right",
@@ -20,18 +20,22 @@ communityIdeas[communityIdeas.length] = (() => {
 
                 biography = document.getElementById("Biography");
                 row = footnote.querySelector("div.row");
-                problemsOrQuestionsBox = row.querySelector("div.col-lg-4:nth-child(1)");
-                profileManagerBox = row.querySelector("div.col-lg-8:nth-child(2)");
-                timestampBox = row.nextElementSibling;
-                if (timestampBox.nextElementSibling && timestampBox.nextElementSibling.tagName == "DIV") {
-                    feedBox = timestampBox.nextElementSibling;
-                    accessedBox = feedBox.nextElementSibling;
-                } else {
-                    accessedBox = timestampBox.nextElementSibling;
-                }
-                timestampValue = timestampBox.innerHTML;
-                helpCousinsBox = accessedBox.querySelector("div");      // moved as part of feature 000
-                return row && problemsOrQuestionsBox && profileManagerBox && timestampBox && accessedBox && biography;
+                footnote.querySelectorAll("*").forEach((e) => {
+                    if (e.tagName == "BUTTON" && e.getAttribute("data-bs-target") == "#privacyModal") {
+                        problemsOrQuestionsBox = e.parentNode;
+                        problemsOrQuestionsParent = problemsOrQuestionsBox.parentNode;
+                        problemsOrQuestionsNext = problemsOrQuestionsBox.nextSibling;
+                    } else if (e.title == "The manager cares for the profile and leads the collaboration") {
+                        profileManagerBox = e.parentNode.parentNode;
+                    } else if (e.nodeValue && e.nodeValue.includes(" created ")) {
+                        timestampBox = e.parentNode;
+                    } else if (e.id == "Edits") {
+                        editsBox = e.parentNode;
+                    } else if (e.nodeValue && e.nodeValue.includes(" cousins find this ")) {
+                        helpCousinsBox = e.parentNode.parentNode;
+                    }
+                });
+                return problemsOrQuestionsBox && profileManagerBox && biography;
             } else {
                 return false;
             }
@@ -47,16 +51,10 @@ communityIdeas[communityIdeas.length] = (() => {
             problemsOrQuestionsBox.classList.remove("col-lg-4");
             problemsOrQuestionsBox.classList.remove("order-lg-2");
             problemsOrQuestionsBox.querySelector("button").classList.remove("float-lg-end");
+            footnote.appendChild(problemsOrQuestionsBox);
             if (helpCousinsBox) {
                 helpCousinsBox.classList.remove("float-lg-end");
             }
-            footnote.appendChild(problemsOrQuestionsBox);
-            // If the the timestamp text can be split into multiple lines, do so
-            let temp = "";
-            for (let v of timestampValue.split(/\|/)) {
-                temp += "<div>" + v + "</div>";
-            }
-            timestampBox.innerHTML = temp;
             return true;
         },
         deactivate: () => {
@@ -69,7 +67,7 @@ communityIdeas[communityIdeas.length] = (() => {
             problemsOrQuestionsBox.classList.add("col-lg-4");
             problemsOrQuestionsBox.classList.add("order-lg-2");
             problemsOrQuestionsBox.querySelector("button").classList.add("float-lg-end");
-            timestampBox.innerHTML = timestampValue;
+            problemsOrQuestionsParent.insertBefore(problemOrQuestionsBox, problemsOrQuestionsNext);
             if (helpCousinsBox) {
                 accessedBox.appendChild(helpCousinsBox);
                 helpCousinsBox.classList.add("float-lg-end");

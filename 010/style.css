@@ -16,7 +16,7 @@ body:has(#familyTreeApps-tab.active) {
         display: flex;
         align-items: center;
         justify-content: center;
-        resize: both;
+        resize: vertical;
     }
 
 }

@@ -4,16 +4,19 @@
 
 body:has(#familyTreeApps-tab.active) {
 
+    /*
     #nav-familyContent ~ *, #subfooter, footer {
         display: none
     }
+    */
 
     #familyTreeApps {
-        height: 80vh;
+        height: 30vh;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
+        resize: both;
     }
 
 }

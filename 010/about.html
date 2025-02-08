@@ -2,13 +2,22 @@
 <link rel="stylesheet" href="../style.css">
 <h1>Make Tree Apps first-class citizens</h1>
 <p>
-A placeholder, but this would be pretty neat I think - it would make tree-apps feel
-a lot more integrated.
-As noted, the easiest approach would be an iFrame containing
-the current tree-apps page, minus the headers/footers.
+This is just a proof of concept, but in theory you could have (probably) a subset
+of tree apps here, one on each tab. I suggest a subset because some (ie one name tree)
+are not directly related to an individual, so may not make much sense when you have
+the biography of an individual below. But many (SlippyTree, Family Timeline etc)
+could work quite well here.
 </p><p>
+Other approaches could be an iframe rather than adding directly to the page, and there
+could be a "plus" tab which allows a user to choose other apps, or to select which
+apps they want on tabs.
+</p>
 <h3>If approved</h3>
 <p>
-Trimming down the current tree-apps view is all that's required.
+Actually not a lot of work here - for SlippyTree I had to create a "View" class, and
+most apps rely on the WikiTreeAPI class too so that would need importing. Managing
+which apps are on tabs could be done client side with cookies if no server side
+changes are wanted at this stage of development. This is a good place for the "app
+chooser" pane that's been discussed.
 </p>
 </html>

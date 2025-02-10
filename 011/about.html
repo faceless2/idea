@@ -1,0 +1,38 @@
+<html class="about">
+<link rel="stylesheet" href="../style.css">
+<h1>Scrolling tree-app support</h1>
+<p>
+There are quite a few tree-apps that try to manage scrolling themselves:
+</p>
+<ul>
+<li>Slippy Tree</li>
+<li>Super Tree</li>
+<li>Couples Dynamic Tree</li>
+<li>Fractal Tree</li>
+<li>etc</li>
+</ul>
+<p>
+The current design tries to manage this by giving them a fixed height, eg 1000px,
+and letting them work within that. A better approach would be using Flex to fill
+the screen, making the #view-container fill available space in that space and
+making it scrollable, so things inside the #view-container can be dragged around.
+A scrollable view-container <b>would fix all the tearing problems</b>.
+</p>
+<p>
+This patch shows how it could be done: by adding a stylesheet and setting the HTML
+element to have a "main-scrolls" class, it changes the page to a flex layout,
+reduces the footer size (unless the mouse hovers over it) and makes #view-container
+the scrollpane.
+</p></p>
+A tree-app could take advantage of this by adding "main-scrolls" class to the root element
+and making a few simple changes to how they manage scrolling. Even without those changes,
+hopefully from what's there now you can get an idea of how it would work.
+</p>
+<h3>If approved</h3>
+<p>
+This one involves changes to any apps that want to make use of this scrolling mechanism,
+but the changes are simple and Mike is happy to help authors and/or apply them himself.
+There's also a <a href="style.css">stylesheet</a> and a one-line event handler to manage
+mouseenter/mouseleave on the footer.
+</p>
+</html>

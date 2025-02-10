@@ -1,0 +1,77 @@
+/**
+ * When the "main-scrolls" class is added to the :root element,
+ * <main> child of the <body> wants to be full screen and manage
+ * scrolling (either directly or through one of its descendents)
+ */
+
+:root.main-scrolls {
+    height: 100%;
+    margin: 0;
+}
+:root.main-scrolls > body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+}
+
+:root.main-scrolls body > main#main {
+    padding: 0;
+    flex: 1;
+}
+
+:root.main-scrolls body > main > .row:has(#view-container) {
+    height: 100%;
+    margin-top: 0 !important;   /* Bootstrap is awful */
+    --bs-gutter-x: 0; /* Bootstrap is awful */
+}
+
+:root.main-scrolls body > main .page--content {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+:root.main-scrolls body > main #view-container {
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+}
+
+:root.main-scrolls #subfooter {
+    display: none;
+}
+
+/* Zero-priority selectors so they can be overridden by particular tree-apps
+*/
+:where(:root.main-scrolls) #view-container {
+    position: relative;
+    overflow: scroll;
+}
+:where(:root.main-scrolls #view-container > :first-child:last-child) {
+    position: absolute;
+}
+
+/* Next methods reduce the #footer item if the "hover" class
+ * is not applied to the footer (:hover being buggy on Safari).
+ * A bit ugly, giving the "copyright" div a class would help.
+ */
+:root.main-scrolls body > :is(#footer, #footer *) {
+    transition-duration: 150ms;
+    transition-property: height, margin, padding;
+}
+:root.main-scrolls body > #footer:not(.hover) {
+    padding: 0;
+}
+:root.main-scrolls body > #footer:not(.hover) ul.nav .nav-item {
+    margin-bottom: 0;
+}
+:root.main-scrolls body > #footer:not(.hover) > * > :last-child {
+    height: 0;
+    margin: 0 !important;
+    overflow: hidden;
+}
+:root.main-scrolls body > #footer:not(.hover) > * > :last-child > :first-child {
+    margin-top: 0;
+}

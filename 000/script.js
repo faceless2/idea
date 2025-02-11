@@ -23,7 +23,7 @@ communityIdeas[communityIdeas.length] = (() => {
             return button && cousins;
         },
         activate: () => {
-            footnote.lastElementChild.appendChild(cousins);
+            footnote.insertBefore(cousins, footnote.firstElementChild.nextElementSibling);
             cousins.classList.add("float-lg-end");
             button.style.marginRight = 0;
             return true;

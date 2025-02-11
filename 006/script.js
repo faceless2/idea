@@ -66,6 +66,9 @@ communityIdeas[communityIdeas.length] = (() => {
                         }
                     } else if (n.tagName == "LABEL") {
                         let target = n.htmlFor;
+                        if (target == "mStatus_MiddleName3") {
+                            target = "mStatus_MiddleName_blank";
+                        }
                         if (!target) {
                             try {
                                 target = n.querySelector("input").value;

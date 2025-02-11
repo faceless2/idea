@@ -7,7 +7,7 @@
 communityIdeas[communityIdeas.length] = (() => {
     const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));
     let footnote, footnoteParent, footnoteNext, rightcolumn;
-    let row, problemsOrQuestionsBox, profileManagerBox, editsBox, helpCousinsBox, biography;
+    let row, problemsOrQuestionsBox, profileManagerBox, editsBox, helpCousinsBox, helpCousinsParent, helpCousinsNext, biography;
 
     let o = {
         name: "Move \"profile manager\" to right",
@@ -27,14 +27,22 @@ communityIdeas[communityIdeas.length] = (() => {
                         problemsOrQuestionsNext = problemsOrQuestionsBox.nextSibling;
                     } else if (e.title == "The manager cares for the profile and leads the collaboration") {
                         profileManagerBox = e.parentNode.parentNode;
-                    } else if (e.nodeValue && e.nodeValue.includes(" created ")) {
-                        timestampBox = e.parentNode;
+                    } else if (e.firstChild && e.firstChild.nodeValue && e.firstChild && e.firstChild.nodeValue.includes(" created ")) {
+                        timestampBox = e;
                     } else if (e.id == "Edits") {
                         editsBox = e.parentNode;
-                    } else if (e.nodeValue && e.nodeValue.includes(" cousins find this ")) {
-                        helpCousinsBox = e.parentNode.parentNode;
+                    } else if (e.firstChild && e.firstChild.nodeValue && e.firstChild.nodeValue.includes(" cousins find this ")) {
+                        helpCousinsBox = e.parentNode;
                     }
                 });
+                if (!helpCousinsBox) {
+                    footnote.parentNode.querySelectorAll(".SMALL *").forEach((e) => {
+                        console.log(e);
+                        if (e.firstChild && e.firstChild.nodeValue && e.firstChild.nodeValue.includes(" cousins find this ")) {
+                            helpCousinsBox = e.parentNode;
+                        }
+                    });
+                }
                 return problemsOrQuestionsBox && profileManagerBox && biography;
             } else {
                 return false;
@@ -52,8 +60,13 @@ communityIdeas[communityIdeas.length] = (() => {
             problemsOrQuestionsBox.classList.remove("order-lg-2");
             problemsOrQuestionsBox.querySelector("button").classList.remove("float-lg-end");
             footnote.appendChild(problemsOrQuestionsBox);
-            if (helpCousinsBox) {
-                helpCousinsBox.classList.remove("float-lg-end");
+            if (helpCousinsBox && footnote.contains(helpCousinsBox)) {
+                helpCousinsParent = helpCousinsBox.parentNode;
+                helpCousinsNext = helpCousinsBox.nextSibling;
+                helpCousinsParent.removeChild(helpCousinsBox);
+                footnote.querySelector("button").parentNode.appendChild(helpCousinsBox);
+            } else {
+                helpCousinsParent = helpCousinsNext = null;
             }
             return true;
         },
@@ -67,10 +80,9 @@ communityIdeas[communityIdeas.length] = (() => {
             problemsOrQuestionsBox.classList.add("col-lg-4");
             problemsOrQuestionsBox.classList.add("order-lg-2");
             problemsOrQuestionsBox.querySelector("button").classList.add("float-lg-end");
-            problemsOrQuestionsParent.insertBefore(problemOrQuestionsBox, problemsOrQuestionsNext);
-            if (helpCousinsBox) {
-                accessedBox.appendChild(helpCousinsBox);
-                helpCousinsBox.classList.add("float-lg-end");
+            problemsOrQuestionsParent.insertBefore(problemsOrQuestionsBox, problemsOrQuestionsNext);
+            if (helpCousinsParent) {
+                helpCousinsParent.insertBefore(helpCousinsBox, helpCousinsNextSibling);
             }
         },
     };

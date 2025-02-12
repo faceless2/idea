@@ -2,7 +2,7 @@
     display: none;
 }
 
-body:has(#familyTreeApps-tab.active) {
+body.profile :has(#slippyInline.active) {
 
     /*
     #nav-familyContent ~ *, #subfooter, footer {
@@ -10,7 +10,7 @@ body:has(#familyTreeApps-tab.active) {
     }
     */
 
-    #familyTreeApps {
+    #slippyInline {
         height: 30vh;
         overflow: hidden;
         display: flex;

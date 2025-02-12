@@ -3,16 +3,10 @@
  */
 communityIdeas[communityIdeas.length] = (() => {
     const baseurl = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf("/"));
-    let link1, link2, script1, button, tab;
+    let script1, newelements;
     let o = {
         name: "Integrated tree-apps",
         load: () => {
-            link1 = document.createElement("link");
-            link1.rel = "stylesheet";
-            link1.href = baseurl + "/style.css";
-            link2 = document.createElement("link");
-            link2.rel = "stylesheet";
-            link2.href = "https://apps.wikitree.com/apps/bremford24/test/views/slippyTree/style.css";
             script1 = document.createElement("script");
             script1.src = "https://apps.wikitree.com/apps/bremford24/test/views/slippyTree/script.js";
             return document.querySelector("#familyVitals") != null;
@@ -35,76 +29,118 @@ communityIdeas[communityIdeas.length] = (() => {
                 }
                 close() { }
             };
-            document.head.appendChild(link1);
-            document.head.appendChild(link2);
             document.head.appendChild(script1);
             script1.addEventListener("load", () => {
-                if (!button) {
-                    button = document.createElement("button");
-                    button.classList.add("nav-link");
-                    button.id = "familyTreeApps-tab";
-                    button.setAttribute("data-bs-toggle", "tab");
-                    button.setAttribute("data-bs-toggle", "tab");
-                    button.setAttribute("data-bs-target", "#familyTreeApps");
-                    button.setAttribute("role", "tab");
-                    button.setAttribute("aria-controls", "familyTreeApps");
-                    button.appendChild(document.createTextNode("Slippy Tree"));
+                const buttonParent = document.querySelector("#familyDescendants-tab").parentNode;
+                const buttonNext = document.querySelector("#familyDescendants-tab").nextSibling;
+                const tabParent = document.querySelector("#familyDescendants").parentNode;
+                const tabNext = document.querySelector("#familyDescendants").nextSibling;
+                if (!newelements) {
+                    newelements = [];
+                    let link = document.createElement("link");
+                    link.rel = "stylesheet";
+                    link.href = baseurl + "/style.css";
+                    newelements.push(link);
+                    link = document.createElement("link");
+                    link.rel = "stylesheet";
+                    link.href = "https://apps.wikitree.com/apps/bremford24/test/views/slippyTree/style.css";
+                    newelements.push(link);
+                    const props = [
+                        {
+                            "name":"slippyInline",
+                            "title":"Slippy Tree (inline)",
+                            "init": (tab, button) => {
+                                tab.slippyTree = new SlippyTree();
+                            },
+                            "show": (tab, id) => {
+                                tab.slippyTree.init(tab, id, {});
+                            },
+                            "hide": (tab) => {
+                                tab.slippyTree.close();
+                            }
+                        },
+                        {
+                            "name":"slippyIframe",
+                            "title":"Slippy Tree (iframe)",
+                            "init": (tab, button) => {
+                                tab.slippyTree = new SlippyTree();
+                            },
+                            "show": (tab, id) => {
+                                let iframe = document.createElement("iframe");
+                                iframe.style.display = "block";
+                                iframe.style.width = "100%";
+                                iframe.style.minHeight = iframe.style.height = "300px";
+                                iframe.style.resizable = "height";
+                                iframe.src = "https://apps.wikitree.com/apps/bremford24/test/views/slippyTree/?person="+id;
+                                tab.appendChild(iframe);
+                            },
+                            "hide": (tab) => {
+                                tab.innerHTML = "";
+                            }
+                        },
+                        {
+                            "name":"addApp",
+                            "title":"+",
+                            "init": (tab, button) => {
+                                tab.innerHTML = "<p style=\"text-align:center\">Some sort of app selector here</p>"
+                            },
+                            "show": (tab,id) => {
+                            },
+                            "hide": (tab) => {
+                            }
+                        }
+                    ];
+                    for (const p of props) {
+                        let button = document.createElement("button");
+                        button.classList.add("nav-link");
+                        button.id = p.name + "-tab";
+                        button.setAttribute("data-bs-toggle", "tab");
+                        button.setAttribute("data-bs-target", "#" + p.name);
+                        button.setAttribute("role", "tab");
+                        button.setAttribute("aria-controls", p.name);
+                        button.appendChild(document.createTextNode(p.title));
 
-                    tab = document.createElement("div");
-                    tab.id="familyTreeApps";
-                    tab.classList.add("tab-pane");
-                    tab.classList.add("fade");
-                    tab.setAttribute("role", "tabpanel");
-                    tab.setAttribute("tabindex", "0");
-                    // Argh. Surely a "selectTab" method is required?
-                    // Going to rely on CSS
-                    button.slippyTree = new SlippyTree();
-                    let properties = {};
-                    button.addEventListener("show.bs.tab", function (event) {
-                        button.slippyTree.init(tab, document.querySelector("button[data-bs-title=\"Copy ID\"]").getAttribute("data-copy-text"), properties);
-                    })
-                    button.addEventListener("hide.bs.tab", function (event) {
-                        button.slippyTree.close();
-                    })
+                        let tab = document.createElement("div");
+                        tab.id = p.name;
+                        tab.classList.add("tab-pane");
+                        tab.classList.add("fade");
+                        tab.setAttribute("role", "tabpanel");
+                        tab.setAttribute("tabindex", "0");
 
-                    button2 = document.createElement("button");
-                    button2.classList.add("nav-link");
-                    button2.id = "addApps-tab";
-                    button2.setAttribute("data-bs-toggle", "tab");
-                    button2.setAttribute("data-bs-toggle", "tab");
-                    button2.setAttribute("data-bs-target", "#addApps");
-                    button2.setAttribute("role", "tab");
-                    button2.setAttribute("aria-controls", "addApps");
-                    button2.appendChild(document.createTextNode("\u00a0+\u00a0"));
-
-                    tab2 = document.createElement("div");
-                    tab2.id="addApps";
-                    tab2.classList.add("tab-pane");
-                    tab2.classList.add("fade");
-                    tab2.setAttribute("role", "tabpanel");
-                    tab2.setAttribute("tabindex", "0");
-                    tab2.innerHTML = "<p style=\"text-align:center\">Some sort of app chooser goes here</p>";
+                        p.init(tab, button);
+                        button.addEventListener("show.bs.tab", function (event) {
+                            let id = document.querySelector("button[data-bs-title=\"Copy ID\"]").getAttribute("data-copy-text");
+                            p.show(tab, id);
+                        })
+                        button.addEventListener("hide.bs.tab", function (event) {
+                            p.hide(tab);
+                        })
+                        newelements.push(button);
+                        newelements.push(tab);
+                        new bootstrap.Tab(tab);
+                    }
                 }
-
-                new bootstrap.Tab(tab);
-                new bootstrap.Tab(tab2);
-                let e = document.querySelector("#familyDescendants");
-                e.parentNode.insertBefore(tab2, e.nextSiblingElement);
-                e.parentNode.insertBefore(tab, tab2);
-                e = document.querySelector("#familyDescendants-tab");
-                e.parentNode.insertBefore(button2, e.nextSiblingElement);
-                e.parentNode.insertBefore(button, button2);
+                for (let e of newelements) {
+                    console.log("ADD " + e.getAttribute("role") +"="+e);
+                    if (e.getAttribute("role") == "tab") {
+                        buttonParent.insertBefore(e, buttonNext);
+                    } else if (e.getAttribute("role") == "tabpanel") {
+                        tabParent.insertBefore(e, tabNext);
+                    } else {
+                        document.head.appendChild(e);
+                    }
+                }
             });
             return true;
-
         },
         deactivate: () => {
             delete window.View;
-            document.head.removeChild(link1);
-            document.head.removeChild(link2);
-            document.head.removeChild(script1);
-            button.parentNode.removeChild(button);
-            tab.parentNode.removeChild(tab);
+            script1.remove();
+            // leave View class, script loaded
+            for (let of in newelements) {
+                e.remove();
+            }
+            newelements = null;
         },
     };
     return o;

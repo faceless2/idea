@@ -12,23 +12,25 @@ communityIdeas[communityIdeas.length] = (() => {
             return document.querySelector("#familyVitals") != null;
         },
         activate: () => {
-            window.View = class View {
-                constructor() {
-                    this.id = null;
-                    Object.assign(this, this?.meta()); // this will spread object into object fields for easier access
-                }
-                meta() {
-                    return {
-                        title: "Template view",
-                        description: "Showcase of the views and their registration.",
-                        docs: "https://example.com",
-                    };
-                }
-                init(container_selector, person_id) {
-                    document.querySelector(container_selector).innerHTML = `Template View for person with ID: ${person_id}`;
-                }
-                close() { }
-            };
+            if (!window.View) {
+                window.View = class View {
+                    constructor() {
+                        this.id = null;
+                        Object.assign(this, this?.meta()); // this will spread object into object fields for easier access
+                    }
+                    meta() {
+                        return {
+                            title: "Template view",
+                            description: "Showcase of the views and their registration.",
+                            docs: "https://example.com",
+                        };
+                    }
+                    init(container_selector, person_id) {
+                        document.querySelector(container_selector).innerHTML = `Template View for person with ID: ${person_id}`;
+                    }
+                    close() { }
+                };
+            }
             document.head.appendChild(script1);
             script1.addEventListener("load", () => {
                 const buttonParent = document.querySelector("#familyDescendants-tab").parentNode;
@@ -109,7 +111,7 @@ communityIdeas[communityIdeas.length] = (() => {
 
                         p.init(tab, button);
                         button.addEventListener("show.bs.tab", function (event) {
-                            let id = document.querySelector("button[data-bs-title=\"Copy ID\"]").getAttribute("data-copy-text");
+                            let id = document.querySelector("[data-mnamedb]").getAttribute("data-mnamedb");
                             p.show(tab, id);
                         })
                         button.addEventListener("hide.bs.tab", function (event) {

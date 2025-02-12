@@ -48,7 +48,7 @@ communityIdeas[communityIdeas.length] = (() => {
                     button.setAttribute("data-bs-target", "#familyTreeApps");
                     button.setAttribute("role", "tab");
                     button.setAttribute("aria-controls", "familyTreeApps");
-                    button.appendChild(document.createTextNode("Tree Apps"));
+                    button.appendChild(document.createTextNode("Slippy Tree"));
 
                     tab = document.createElement("div");
                     tab.id="familyTreeApps";
@@ -66,13 +66,34 @@ communityIdeas[communityIdeas.length] = (() => {
                     button.addEventListener("hide.bs.tab", function (event) {
                         button.slippyTree.close();
                     })
+
+                    button2 = document.createElement("button");
+                    button2.classList.add("nav-link");
+                    button2.id = "addApps-tab";
+                    button2.setAttribute("data-bs-toggle", "tab");
+                    button2.setAttribute("data-bs-toggle", "tab");
+                    button2.setAttribute("data-bs-target", "#addApps");
+                    button2.setAttribute("role", "tab");
+                    button2.setAttribute("aria-controls", "addApps");
+                    button2.appendChild(document.createTextNode("\u00a0+\u00a0"));
+
+                    tab2 = document.createElement("div");
+                    tab2.id="addApps";
+                    tab2.classList.add("tab-pane");
+                    tab2.classList.add("fade");
+                    tab2.setAttribute("role", "tabpanel");
+                    tab2.setAttribute("tabindex", "0");
+                    tab2.innerHTML = "<p style=\"text-align:center\">Some sort of app chooser goes here</p>";
                 }
 
                 new bootstrap.Tab(tab);
+                new bootstrap.Tab(tab2);
                 let e = document.querySelector("#familyDescendants");
-                e.parentNode.insertBefore(tab, e.nextSiblingElement);
+                e.parentNode.insertBefore(tab2, e.nextSiblingElement);
+                e.parentNode.insertBefore(tab, tab2);
                 e = document.querySelector("#familyDescendants-tab");
-                e.parentNode.insertBefore(button, e.nextSiblingElement);
+                e.parentNode.insertBefore(button2, e.nextSiblingElement);
+                e.parentNode.insertBefore(button, button2);
             });
             return true;
 

@@ -72,7 +72,7 @@ communityIdeas[communityIdeas.length] = (() => {
                                 iframe.style.display = "block";
                                 iframe.style.width = "100%";
                                 iframe.style.minHeight = iframe.style.height = "300px";
-                                iframe.style.resizable = "height";
+                                iframe.style.resize = "vertical";
                                 iframe.src = "https://apps.wikitree.com/apps/bremford24/test/views/slippyTree/?person="+id;
                                 tab.appendChild(iframe);
                             },
